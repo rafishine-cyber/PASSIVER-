@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PA$$IVER — Official Brand Kit & Design System (v14)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Display:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans:wght@400;500;700&family=Raleway:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --max-w: 1280px;
+      --gutter: 32px;
+      --section-gap: 64px;
+      --grid-gap: 20px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-pill: 9999px;
+
+      --font-sans: 'Google Sans Text', 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Google Sans Display', 'Google Sans', sans-serif;
+      --font-wordmark: 'Raleway', sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+      --ls-wordmark-hero: 0.14em;
+      --ls-wordmark-ui: 0.12em;
+      --ls-banner-phrase: 0.04em;
+      --ls-display: 0.015em;
+      --ls-heading: 0.02em;
+      --ls-subheading: 0.02em;
+      --ls-body: 0.02em;
+      --ls-ui: 0.03em;
+      --ls-badge: 0.05em;
+      --ls-kicker: 0.08em;
+
+      --bg-base: #F8F8F6;
+      --bg-surface: #EFECE6;
+      --bg-surface-alt: #E5E1D8;
+      --bg-pill: #E2DDD2;
+      --text-primary: #141416;
+      --text-secondary: #4A4A52;
+      --text-muted: #6C6C75;
+
+      --gold-ink: #644A07;
+      --gold-display: #B8922E;
+      --gold-btn: #CDAA54;
+      --gold-btn-hover: #DFBE6B;
+      --gold-btn-text: #18181B;
+      --accent-ink: #644A07;
+      --accent-soft: rgba(205, 170, 84, 0.16);
+      --logo-color: #18181B;
+      --bg-header-glass: rgba(248, 248, 246, 0.90);
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #101012;
+      --bg-surface: #18181C;
+      --bg-surface-alt: #222228;
+      --bg-pill: #26262D;
+      --text-primary: #F4F4F6;
+      --text-secondary: #B4B4BE;
+      --text-muted: #8A8A96;
+
+      --gold-ink: #E3C16F;
+      --gold-display: #E3C16F;
+      --gold-btn: #CDAA54;
+      --gold-btn-hover: #DFBE6B;
+      --gold-btn-text: #141416;
+      --accent-ink: #E3C16F;
+      --accent-soft: rgba(227, 193, 111, 0.16);
+      --logo-color: #FFFFFF;
+      --bg-header-glass: rgba(16, 16, 18, 0.90);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: var(--font-sans);
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      letter-spacing: var(--ls-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.65;
+      letter-spacing: var(--ls-body);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    h1, h2, h3, h4, p, span, a, li, button, code, pre {
+      letter-spacing: inherit;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--gold-btn);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    .wordmark {
+      font-family: var(--font-wordmark);
+      font-weight: 700;
+      letter-spacing: var(--ls-wordmark-ui);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .wordmark-medium {
+      font-family: var(--font-wordmark);
+      font-weight: 500;
+      letter-spacing: var(--ls-wordmark-ui);
+      line-height: 1;
+    }
+
+    /* Sticky Utility Toolbar */
+    .kit-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-header-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 0;
+    }
+
+    .toolbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      display: block;
+      flex-shrink: 0;
+      color: var(--logo-color);
+      transition: color 0.2s ease;
+    }
+
+    img.brand-logo {
+      filter: brightness(0) saturate(100%) invert(8%) sepia(8%) saturate(500%) hue-rotate(205deg) brightness(95%) contrast(95%);
+    }
+
+    [data-theme="dark"] img.brand-logo {
+      filter: brightness(0) invert(1);
+    }
+
+    .specimen-light img.brand-logo,
+    .specimen-surface img.brand-logo,
+    .specimen-gold img.brand-logo {
+      filter: brightness(0) saturate(100%) invert(8%) sepia(8%) saturate(500%) hue-rotate(205deg) brightness(95%) contrast(95%);
+    }
+
+    .specimen-dark img.brand-logo {
+      filter: brightness(0) invert(1);
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--accent-soft);
+      color: var(--accent-ink);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: var(--ls-badge);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: currentColor;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-control {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-pill);
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .icon-control:hover {
+      color: var(--gold-ink);
+    }
+
+    .icon-control svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.85;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 11px 20px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: var(--ls-ui);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-gold {
+      background-color: var(--gold-btn);
+      color: var(--gold-btn-text);
+    }
+
+    .btn-gold:hover {
+      background-color: var(--gold-btn-hover);
+    }
+
+    .btn-tonal {
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+    }
+
+    .btn-tonal:hover {
+      background-color: var(--bg-surface-alt);
+    }
+
+    .btn-arrow-icon {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.18s ease;
+    }
+
+    .btn:hover .btn-arrow-icon {
+      transform: translate(2px, -2px);
+    }
+
+    /* Cover Hero */
+    .cover-section {
+      padding: 36px 0 48px;
+    }
+
+    .cover-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .cover-wordmark {
+      font-family: var(--font-wordmark);
+      font-weight: 700;
+      font-size: clamp(2rem, 3.2vw, 2.75rem);
+      letter-spacing: var(--ls-wordmark-hero);
+      color: var(--text-primary);
+      line-height: 1;
+    }
+
+    .cover-mantra {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+      letter-spacing: var(--ls-banner-phrase);
+      color: var(--gold-display);
+      line-height: 1.1;
+    }
+
+    .cover-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      font-weight: 500;
+      line-height: 1.16;
+      letter-spacing: var(--ls-display);
+      margin-bottom: 16px;
+    }
+
+    .cover-copy {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 58ch;
+      margin-bottom: 24px;
+    }
+
+    .meta-grid {
+      background-color: var(--bg-base);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 0.9rem;
+      letter-spacing: var(--ls-ui);
+    }
+
+    .meta-row span:first-child {
+      color: var(--text-muted);
+    }
+
+    .meta-row span:last-child {
+      font-weight: 500;
+      color: var(--text-primary);
+      text-align: right;
+    }
+
+    /* Sections */
+    .section {
+      padding-top: var(--section-gap);
+      break-inside: avoid;
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: var(--ls-kicker);
+      text-transform: uppercase;
+      color: var(--gold-ink);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .section-headline-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-ink);
+      flex-shrink: 0;
+    }
+
+    .section-headline-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 2.3vw, 2.15rem);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: var(--ls-heading);
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      max-width: 64ch;
+      margin-bottom: 28px;
+    }
+
+    /* Grids & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--grid-gap);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--grid-gap);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--grid-gap);
+    }
+
+    .surface-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      break-inside: avoid;
+    }
+
+    /* Logo Specimens */
+    .specimen-box {
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 170px;
+      text-align: center;
+    }
+
+    .specimen-light {
+      background-color: #F8F8F6;
+      color: #18181B;
+    }
+
+    .specimen-surface {
+      background-color: #EFECE6;
+      color: #18181B;
+    }
+
+    .specimen-dark {
+      background-color: #101012;
+      color: #FFFFFF;
+    }
+
+    .specimen-gold {
+      background-color: #CDAA54;
+      color: #18181B;
+    }
+
+    .specimen-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: var(--ls-badge);
+      opacity: 0.82;
+    }
+
+    .lockup-demo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Color Swatches */
+    .swatch-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      break-inside: avoid;
+    }
+
+    .swatch-color {
+      height: 112px;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 12px;
+    }
+
+    .swatch-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .swatch-name {
+      font-weight: 500;
+      font-size: 0.98rem;
+      letter-spacing: var(--ls-subheading);
+    }
+
+    .swatch-token {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .swatch-usage {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .copy-chip {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .copy-chip:hover {
+      background-color: var(--gold-btn);
+      color: var(--gold-btn-text);
+    }
+
+    /* Typography Table */
+    .type-row {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-md);
+      padding: 22px 26px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 14px;
+      break-inside: avoid;
+    }
+
+    .type-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .pill-tag {
+      background-color: var(--bg-base);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: var(--ls-badge);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pill-gold {
+      background-color: var(--accent-soft);
+      color: var(--gold-ink);
+    }
+
+    /* Guidelines Lists */
+    .rule-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+      color: var(--text-secondary);
+      font-size: 0.93rem;
+    }
+
+    .rule-list li::before {
+      content: "• ";
+      color: var(--gold-ink);
+      font-weight: 700;
+    }
+
+    /* Token Code Block */
+    .code-panel {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+
+    .code-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 12px;
+    }
+
+    .code-pre {
+      background-color: var(--bg-base);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* Footer */
+    .kit-footer {
+      margin-top: var(--section-gap);
+      padding: 36px 0 24px;
+    }
+
+    .footer-brand-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .footer-tagline {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+      letter-spacing: var(--ls-heading);
+      color: var(--gold-ink);
+      line-height: 1.2;
+    }
+
+    .footer-wordmark-strip {
+      width: 100%;
+      padding: 8px 0 4px;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .edge-wordmark-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0 28px;
+      font-size: 0.85rem;
+      letter-spacing: var(--ls-ui);
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .cover-card,
+      .grid-3,
+      .grid-4,
+      .type-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .type-meta {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --gutter: 20px;
+        --section-gap: 48px;
+      }
+
+      .cover-card,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .type-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Print / Save as PDF Optimization */
+    @page {
+      size: A4 portrait;
+      margin: 12mm;
+    }
+
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html, body {
+        background-color: #F8F8F6 !important;
+        color: #141416 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .section {
+        padding-top: 28px;
+      }
+
+      .cover-section {
+        padding: 8px 0 24px;
+      }
+
+      .page-break {
+        break-before: page;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Interactive Toolbar (Hidden in Print/PDF) -->
+  <header class="kit-toolbar no-print">
+    <div class="container toolbar-inner">
+      <div class="toolbar-brand">
+        <span class="wordmark" style="font-size: 1.35rem;">PA$$IVER</span>
+        <img
+          src="https://raw.githubusercontent.com/rafishine-cyber/PASSIVER-/refs/heads/main/PA%24%24IVER-BIRD.svg"
+          alt="PA$$IVER Bird Emblem"
+          class="brand-logo"
+          onerror="this.style.display='none';"
+        />
+        <span class="brand-badge">
+          <span class="badge-dot"></span>
+          Brand Kit · v14
+        </span>
+      </div>
+
+      <div class="toolbar-actions">
+        <button id="themeToggle" class="icon-control" type="button" aria-label="Preview light or dark theme" title="Toggle theme">
+          <svg id="themeIconMoon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="themeIconSun" viewBox="0 0 24 24" aria-hidden="true" style="display:none;">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+        </button>
+
+        <button id="printPdfBtn" class="btn btn-gold" type="button">
+          <span>Download / Save as PDF</span>
+          <svg class="btn-arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H8M17 7V16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Cover Banner -->
+    <section class="cover-section">
+      <div class="cover-header-row">
+        <span class="cover-wordmark">PA$$IVER</span>
+        <span class="cover-mantra">Learn. Dub. Deploy.</span>
+      </div>
+
+      <div class="cover-card">
+        <div>
+          <span class="section-kicker">Identity &amp; Design Architecture · v14</span>
+          <h1 class="cover-title">The Sovereign Flat-Surface Brand System</h1>
+          <p class="cover-copy">
+            Official visual guidelines, wordmark geometry, color tokens, typography scale, and UI component rules for the PA$$IVER verified global consulting and digital asset marketplace.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <span class="pill-tag pill-gold">1280px Flat Surface Standard</span>
+            <span class="pill-tag">Zero Shadows · Zero Green/Blue</span>
+            <span class="pill-tag">92/8 Radical Transparency</span>
+          </div>
+        </div>
+
+        <div class="meta-grid">
+          <div class="meta-row">
+            <span>Primary Wordmark</span>
+            <span>Raleway 700</span>
+          </div>
+          <div class="meta-row">
+            <span>Editorial Wordmark</span>
+            <span>Raleway 500</span>
+          </div>
+          <div class="meta-row">
+            <span>UI &amp; Display Type</span>
+            <span>Google Sans Display / Text</span>
+          </div>
+          <div class="meta-row">
+            <span>Emblem Size</span>
+            <span>60 × 60 px Standard</span>
+          </div>
+          <div class="meta-row">
+            <span>Signature Gold</span>
+            <span>#CDAA54 / #644A07</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01. Brand Messaging & Taglines -->
+    <section class="section">
+      <span class="section-kicker">01 · Verbal Identity</span>
+      <div class="section-title-row">
+        <span class="section-headline-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </span>
+        <h2 class="section-title">Official Mantras &amp; Header Carousel Copy</h2>
+      </div>
+      <p class="section-desc">
+        All brand statements are rendered in Title Caps using Google Sans Display Medium (500) paired with metallic gold ink.
+      </p>
+
+      <div class="grid-3">
+        <div class="surface-card">
+          <span class="pill-tag pill-gold">Primary Mantra</span>
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--gold-display); margin: 14px 0 8px;">
+            Learn. Dub. Deploy.
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">
+            Used in the hero header carousel and paired beside the 60×60px Bird emblem in the footer H2 lockup.
+          </p>
+        </div>
+
+        <div class="surface-card">
+          <span class="pill-tag pill-gold">Global Reach</span>
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--gold-display); margin: 14px 0 8px;">
+            Verified Experts Around The Globe.
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">
+            Communicates multi-region vetted practitioner coverage across AI, brand architecture, and compliance.
+          </p>
+        </div>
+
+        <div class="surface-card">
+          <span class="pill-tag pill-gold">Trust Ethos</span>
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--gold-display); margin: 14px 0 8px;">
+            We Don't Sell Trust. We Earn It.
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">
+            Anchors the 92/8 transparent payout split, SHA-256 verification ledger, and zero-markup guarantee.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02. Wordmark & Bird Emblem -->
+    <section class="section page-break">
+      <span class="section-kicker">02 · Logo &amp; Wordmark System</span>
+      <div class="section-title-row">
+        <span class="section-headline-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+        </span>
+        <h2 class="section-title">Wordmark Weights &amp; Bird Emblem Applications</h2>
+      </div>
+      <p class="section-desc">
+        The geometric Bird emblem pairs with Raleway 700 in active UI navigation and Raleway 500 in large edge-to-edge architectural footers.
+      </p>
+
+      <div class="grid-4" style="margin-bottom: 24px;">
+        <div class="specimen-box specimen-light">
+          <img
+            src="https://raw.githubusercontent.com/rafishine-cyber/PASSIVER-/refs/heads/main/PA%24%24IVER-BIRD.svg"
+            alt="Light Surface Bird Logo"
+            class="brand-logo"
+            data-force-color="#18181B"
+          />
+          <span class="wordmark" style="font-size: 1.2rem; color: #141416;">PA$$IVER</span>
+          <span class="specimen-label">Light Canvas · #18181B</span>
+        </div>
+
+        <div class="specimen-box specimen-surface">
+          <img
+            src="https://raw.githubusercontent.com/rafishine-cyber/PASSIVER-/refs/heads/main/PA%24%24IVER-BIRD.svg"
+            alt="Warm Surface Bird Logo"
+            class="brand-logo"
+            data-force-color="#18181B"
+          />
+          <span class="wordmark" style="font-size: 1.2rem; color: #141416;">PA$$IVER</span>
+          <span class="specimen-label">Surface · #18181B</span>
+        </div>
+
+        <div class="specimen-box specimen-dark">
+          <img
+            src="https://raw.githubusercontent.com/rafishine-cyber/PASSIVER-/refs/heads/main/PA%24%24IVER-BIRD.svg"
+            alt="Dark Canvas Bird Logo"
+            class="brand-logo"
+            data-force-color="#FFFFFF"
+          />
+          <span class="wordmark" style="font-size: 1.2rem; color: #F4F4F6;">PA$$IVER</span>
+          <span class="specimen-label">Dark Canvas · #FFFFFF</span>
+        </div>
+
+        <div class="specimen-box specimen-gold">
+          <img
+            src="https://raw.githubusercontent.com/rafishine-cyber/PASSIVER-/refs/heads/main/PA%24%24IVER-BIRD.svg"
+            alt="Gold Surface Bird Logo"
+            class="brand-logo"
+            data-force-color="#18181B"
+          />
+          <span class="wordmark" style="font-size: 1.2rem; color: #18181B;">PA$$IVER</span>
+          <span class="specimen-label">Gold Accent · #18181B</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="surface-card">
+          <span class="pill-tag">Sticky Center Lockup</span>
+          <div style="margin: 22px 0; padding: 18px; background: var(--bg-base); border-radius: var(--radius-md); display: flex; justify-content: center;">
+            <div class="lockup-demo">
+              <span class="wordmark" style="font-size: 1.3rem;">PA$$IVER</span>
+              <img
+                src="https://raw.githubusercontent.com/rafishine-cyber/PASSIVER-/refs/heads/main/PA%24%24IVER-BIRD.svg"
+                alt="Sticky Lockup Bird"
+                class="brand-logo"
+              />
+              <span class="brand-badge"><span class="badge-dot"></span>Global</span>
+            </div>
+          </div>
+          <ul class="rule-list">
+            <li>Wordmark sits left (revealed on scroll, hidden at header &amp; footer).</li>
+            <li>60×60px Bird emblem + Global pill stay centered at all times.</li>
+          </ul>
+        </div>
+
+        <div class="surface-card">
+          <span class="pill-tag pill-gold">Footer Lockup</span>
+          <div style="margin: 22px 0; padding: 18px; background: var(--bg-base); border-radius: var(--radius-md); display: flex; align-items: center;">
+            <div class="lockup-demo">
+              <img
+                src="https://raw.githubusercontent.com/rafishine-cyber/PASSIVER-/refs/heads/main/PA%24%24IVER-BIRD.svg"
+                alt="Footer Lockup Bird"
+                class="brand-logo"
+              />
+              <span style="font-family: var(--font-display); font-weight: 500; font-size: 1.75rem; letter-spacing: var(--ls-heading); color: var(--gold-ink);">Learn. Dub. Deploy.</span>
+            </div>
+          </div>
+          <ul class="rule-list">
+            <li>60×60px Bird emblem precedes the H2 tagline in `#644A07` (light) / `#E3C16F` (dark).</li>
+            <li>Edge-to-edge Raleway 500 `#CDAA54` wordmark sits below the 4-column grid.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. Color Palette -->
+    <section class="section page-break">
+      <span class="section-kicker">03 · Color Architecture</span>
+      <div class="section-title-row">
+        <span class="section-headline-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+          </svg>
+        </span>
+        <h2 class="section-title">Warm Neutrals, Obsidian &amp; Sovereign Gold</h2>
+      </div>
+      <p class="section-desc">
+        Green and blue hues are strictly omitted. All surfaces rely on tonal warm neutrals, obsidian dark tones, and metallic gold accents. Click any hex badge to copy.
+      </p>
+
+      <div class="grid-4">
+        <div class="swatch-card">
+          <div class="swatch-color" style="background-color: #F8F8F6;">
+            <button class="copy-chip no-print" data-copy="#F8F8F6" type="button">#F8F8F6</button>
+          </div>
+          <div class="swatch-body">
+            <div class="swatch-name">Alabaster Canvas</div>
+            <div class="swatch-token">--bg-base · #F8F8F6</div>
+            <div class="swatch-usage">Primary page, header &amp; footer background (Light).</div>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background-color: #EFECE6;">
+            <button class="copy-chip no-print" data-copy="#EFECE6" type="button">#EFECE6</button>
+          </div>
+          <div class="swatch-body">
+            <div class="swatch-name">Warm Stone Surface</div>
+            <div class="swatch-token">--bg-surface · #EFECE6</div>
+            <div class="swatch-usage">Cards, panels, dropdown menus, and tonal buttons.</div>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background-color: #CDAA54;">
+            <button class="copy-chip no-print" data-copy="#CDAA54" type="button">#CDAA54</button>
+          </div>
+          <div class="swatch-body">
+            <div class="swatch-name">Sovereign Gold</div>
+            <div class="swatch-token">--gold-btn · #CDAA54</div>
+            <div class="swatch-usage">Primary CTAs, focus rings, footer wordmark, dark mode logo.</div>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background-color: #644A07;">
+            <button class="copy-chip no-print" data-copy="#644A07" type="button">#644A07</button>
+          </div>
+          <div class="swatch-body">
+            <div class="swatch-name">Deep Bronze Gold</div>
+            <div class="swatch-token">--gold-ink · #644A07</div>
+            <div class="swatch-usage">High-contrast gold ink, section icons, footer H2, badges.</div>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background-color: #B8922E;">
+            <button class="copy-chip no-print" data-copy="#B8922E" type="button">#B8922E</button>
+          </div>
+          <div class="swatch-body">
+            <div class="swatch-name">Display Gold</div>
+            <div class="swatch-token">--gold-display · #B8922E</div>
+            <div class="swatch-usage">Animated header tagline text on light alabaster canvas.</div>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background-color: #E3C16F;">
+            <button class="copy-chip no-print" data-copy="#E3C16F" type="button">#E3C16F</button>
+          </div>
+          <div class="swatch-body">
+            <div class="swatch-name">Luminous Gold (Dark)</div>
+            <div class="swatch-token">--gold-ink (dark) · #E3C16F</div>
+            <div class="swatch-usage">Gold ink, kickers, icons, and display text in dark theme.</div>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background-color: #18181B;">
+            <button class="copy-chip no-print" data-copy="#18181B" type="button">#18181B</button>
+          </div>
+          <div class="swatch-body">
+            <div class="swatch-name">Obsidian Ink</div>
+            <div class="swatch-token">--logo-color · #18181B</div>
+            <div class="swatch-usage">Bird emblem in light theme &amp; button text on gold fills.</div>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background-color: #101012;">
+            <button class="copy-chip no-print" data-copy="#101012" type="button">#101012</button>
+          </div>
+          <div class="swatch-body">
+            <div class="swatch-name">Midnight Base (Dark)</div>
+            <div class="swatch-token">--bg-base (dark) · #101012</div>
+            <div class="swatch-usage">Dark-mode canvas paired with #18181C surface cards.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. Typography & Letter Spacing -->
+    <section class="section page-break">
+      <span class="section-kicker">04 · Typography &amp; Tracking</span>
+      <div class="section-title-row">
+        <span class="section-headline-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+        </span>
+        <h2 class="section-title">Type Hierarchy &amp; Respected Letter Spacing</h2>
+      </div>
+      <p class="section-desc">
+        Every typographic level uses intentional positive tracking to preserve clarity across Latin, Arabic, Devanagari, and CJK interfaces.
+      </p>
+
+      <div class="type-row">
+        <div>
+          <span class="wordmark" style="font-size: 2rem;">PA$$IVER</span>
+        </div>
+        <div class="type-meta">
+          <span class="pill-tag pill-gold">Raleway 700</span>
+          <span class="pill-tag">ls: 0.14em / 0.12em</span>
+          <span class="pill-tag">Header &amp; Sticky Bar</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <span class="wordmark-medium" style="font-size: 2rem; color: var(--gold-btn);">PA$$IVER</span>
+        </div>
+        <div class="type-meta">
+          <span class="pill-tag pill-gold">Raleway 500</span>
+          <span class="pill-tag">Edge-to-Edge 1280px</span>
+          <span class="pill-tag">Footer Wordmark</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <span style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 500; letter-spacing: var(--ls-display);">
+            Direct access to audited specialists.
+          </span>
+        </div>
+        <div class="type-meta">
+          <span class="pill-tag">Google Sans Display 500</span>
+          <span class="pill-tag">ls: 0.015em</span>
+          <span class="pill-tag">H1 Hero Headline</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <span style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; letter-spacing: var(--ls-heading); color: var(--gold-ink);">
+            Learn. Dub. Deploy.
+          </span>
+        </div>
+        <div class="type-meta">
+          <span class="pill-tag">Google Sans Display 500</span>
+          <span class="pill-tag">ls: 0.02em</span>
+          <span class="pill-tag">H2 Section &amp; Footer</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <span style="font-family: var(--font-sans); font-size: 1rem; font-weight: 400; letter-spacing: var(--ls-body); color: var(--text-secondary);">
+            Transparent fee disclosures, credential audits, and zero hidden platform markups.
+          </span>
+        </div>
+        <div class="type-meta">
+          <span class="pill-tag">Google Sans Text 400</span>
+          <span class="pill-tag">ls: 0.02em · lh: 1.65</span>
+          <span class="pill-tag">Body Copy</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <span style="font-size: 0.825rem; font-weight: 500; letter-spacing: var(--ls-kicker); text-transform: uppercase; color: var(--gold-ink);">
+            FEATURED VERIFIED LISTING
+          </span>
+        </div>
+        <div class="type-meta">
+          <span class="pill-tag">Google Sans Text 500</span>
+          <span class="pill-tag">ls: 0.08em</span>
+          <span class="pill-tag">Section Kickers</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. UI Components & Flat Rules -->
+    <section class="section">
+      <span class="section-kicker">05 · Flat Component Rules</span>
+      <div class="section-title-row">
+        <span class="section-headline-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="6" cy="6" r="3"></circle>
+            <circle cx="18" cy="6" r="3"></circle>
+            <circle cx="12" cy="18" r="3"></circle>
+            <path d="M8.5 7.5 11 15.2"></path>
+            <path d="M15.5 7.5 13 15.2"></path>
+          </svg>
+        </span>
+        <h2 class="section-title">Buttons, Badges &amp; Surface Standards</h2>
+      </div>
+      <p class="section-desc">
+        All interactive elements use flat tonal contrast instead of drop shadows, and every CTA button carries the signature arrow-up-right icon.
+      </p>
+
+      <div class="grid-2">
+        <div class="surface-card">
+          <span class="pill-tag">Button System</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0;">
+            <span class="btn btn-gold">
+              <span>Explore verified experts</span>
+              <svg class="btn-arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 17L17 7M17 7H8M17 7V16"></path>
+              </svg>
+            </span>
+            <span class="btn btn-tonal" style="background: var(--bg-base);">
+              <span>Inspect fee disclosure</span>
+              <svg class="btn-arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 17L17 7M17 7H8M17 7V16"></path>
+              </svg>
+            </span>
+          </div>
+          <ul class="rule-list">
+            <li>Full pill radius (`9999px`) with bold `21px` arrow-up-right icon.</li>
+            <li>No elevation shadows; hover shifts surface color + icon `(+2px, -2px)`.</li>
+          </ul>
+        </div>
+
+        <div class="surface-card">
+          <span class="pill-tag pill-gold">Dos &amp; Don'ts</span>
+          <ul class="rule-list">
+            <li><strong>Do:</strong> Maintain `1280px` max container width with `32px` desktop / `20px` mobile gutters.</li>
+            <li><strong>Do:</strong> Use unfilled `26px` outline icons directly beside section `H2` titles.</li>
+            <li><strong>Do:</strong> Keep header &amp; footer backgrounds unified with `--bg-base`.</li>
+            <li><strong>Don't:</strong> Add `box-shadow`, `text-shadow`, or divider borders on the sticky bar.</li>
+            <li><strong>Don't:</strong> Introduce green or blue status pills; use `--accent-soft` + `--gold-ink`.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. CSS Design Tokens -->
+    <section class="section page-break">
+      <span class="section-kicker">06 · Engineering Handoff</span>
+      <div class="section-title-row">
+        <span class="section-headline-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="8" y="2" width="8" height="4" rx="1"></rect>
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+            <path d="m9 14 2 2 4-4"></path>
+          </svg>
+        </span>
+        <h2 class="section-title">Production CSS Variables</h2>
+      </div>
+
+      <div class="code-panel">
+        <div class="code-head">
+          <span style="font-size: 0.9rem; font-weight: 500; color: var(--text-secondary);">PA$$IVER v14 Root Tokens</span>
+          <button id="copyTokensBtn" class="copy-chip no-print" type="button">Copy CSS Tokens</button>
+        </div>
+        <pre class="code-pre" id="cssTokensBlock">:root {
+  --max-w: 1280px;
+  --gutter: 32px;
+  --font-wordmark: 'Raleway', sans-serif;
+  --font-display: 'Google Sans Display', 'Google Sans', sans-serif;
+  --font-sans: 'Google Sans Text', 'Google Sans', sans-serif;
+
+  --bg-base: #F8F8F6;
+  --bg-surface: #EFECE6;
+  --text-primary: #141416;
+  --text-secondary: #4A4A52;
+  --gold-ink: #644A07;
+  --gold-display: #B8922E;
+  --gold-btn: #CDAA54;
+  --logo-color: #18181B;
+}
+
+[data-theme="dark"] {
+  --bg-base: #101012;
+  --bg-surface: #18181C;
+  --text-primary: #F4F4F6;
+  --text-secondary: #B4B4BE;
+  --gold-ink: #E3C16F;
+  --gold-display: #E3C16F;
+  --gold-btn: #CDAA54;
+  --logo-color: #FFFFFF;
+}</pre>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="kit-footer">
+      <div class="footer-brand-row">
+        <img
+          src="https://raw.githubusercontent.com/rafishine-cyber/PASSIVER-/refs/heads/main/PA%24%24IVER-BIRD.svg"
+          alt="PA$$IVER Bird Emblem"
+          class="brand-logo"
+          onerror="this.style.display='none';"
+        />
+        <h2 class="footer-tagline">Learn. Dub. Deploy.</h2>
+      </div>
+
+      <div class="footer-wordmark-strip" aria-hidden="true">
+        <svg class="edge-wordmark-svg" viewBox="0 0 1216 250" preserveAspectRatio="xMidYMid meet">
+          <text x="608" y="128" text-anchor="middle" dominant-baseline="central" fill="#CDAA54"
+                textLength="1212" lengthAdjust="spacing"
+                style="font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 238px;">
+            PA$$IVER
+          </text>
+        </svg>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 <span class="wordmark-medium">PA$$IVER</span> Global Ecosystem · Official Brand Kit v14</span>
+        <span>1280px Flat Surface Standard · Print-Ready A4 PDF</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const moonIcon = document.getElementById('themeIconMoon');
+    const sunIcon = document.getElementById('themeIconSun');
+    const rootEl = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = rootEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      rootEl.setAttribute('data-theme', nextTheme);
+      moonIcon.style.display = nextTheme === 'dark' ? 'none' : 'block';
+      sunIcon.style.display = nextTheme === 'dark' ? 'block' : 'none';
+    });
+
+    // Print / Save as PDF
+    document.getElementById('printPdfBtn').addEventListener('click', () => {
+      window.print();
+    });
+
+    // Copy swatch hex & CSS tokens
+    document.querySelectorAll('[data-copy]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const val = btn.getAttribute('data-copy');
+        try {
+          await navigator.clipboard.writeText(val);
+          btn.textContent = 'Copied!';
+          setTimeout(() => { btn.textContent = val; }, 1200);
+        } catch (_) {}
+      });
+    });
+
+    document.getElementById('copyTokensBtn').addEventListener('click', async (e) => {
+      const btn = e.currentTarget;
+      const css = document.getElementById('cssTokensBlock').textContent;
+      try {
+        await navigator.clipboard.writeText(css);
+        btn.textContent = 'Copied CSS!';
+        setTimeout(() => { btn.textContent = 'Copy CSS Tokens'; }, 1500);
+      } catch (_) {}
+    });
+
+    // Inline Bird SVG so theme + fixed specimen colors stay razor sharp
+    (async () => {
+      const logoImgs = Array.from(document.querySelectorAll('img.brand-logo'));
+      if (!logoImgs.length) return;
+      try {
+        const res = await fetch(logoImgs[0].src);
+        if (!res.ok) return;
+        const svgText = await res.text();
+        const doc = new DOMParser().parseFromString(svgText, 'image/svg+xml');
+        const parsedSvg = doc.querySelector('svg');
+        if (!parsedSvg) return;
+
+        parsedSvg.removeAttribute('width');
+        parsedSvg.removeAttribute('height');
+
+        const recolorNode = (el) => {
+          const fill = el.getAttribute('fill');
+          const stroke = el.getAttribute('stroke');
+          if (fill && fill.toLowerCase() !== 'none') el.setAttribute('fill', 'currentColor');
+          if (stroke && stroke.toLowerCase() !== 'none') el.setAttribute('stroke', 'currentColor');
+          if (el.style) {
+            if (el.style.fill && el.style.fill !== 'none') el.style.fill = 'currentColor';
+            if (el.style.stroke && el.style.stroke !== 'none') el.style.stroke = 'currentColor';
+          }
+        };
+
+        recolorNode(parsedSvg);
+        parsedSvg.querySelectorAll('path, circle, rect, polygon, polyline, line, ellipse, g').forEach(recolorNode);
+        parsedSvg.querySelectorAll('style').forEach((styleTag) => {
+          styleTag.textContent = styleTag.textContent
+            .replace(/(fill\s*:\s*)(?!none\b)[^;}"']+/gi, '$1currentColor')
+            .replace(/(stroke\s*:\s*)(?!none\b)[^;}"']+/gi, '$1currentColor');
+        });
+
+        logoImgs.forEach((img) => {
+          const clone = parsedSvg.cloneNode(true);
+          clone.setAttribute('class', 'brand-logo');
+          clone.setAttribute('role', 'img');
+          clone.setAttribute('aria-label', img.alt || 'PA$$IVER Bird Emblem');
+          const forcedColor = img.getAttribute('data-force-color');
+          if (forcedColor) clone.style.color = forcedColor;
+          img.replaceWith(clone);
+        });
+      } catch (_) {}
+    })();
+  </script>
+</body>
+</html>
